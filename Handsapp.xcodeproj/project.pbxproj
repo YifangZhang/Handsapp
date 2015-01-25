@@ -16,6 +16,10 @@
 		16571A9B1A64D5000041C44F /* HandsappTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16571A9A1A64D5000041C44F /* HandsappTests.m */; };
 		16571AA51A64D5490041C44F /* Handsapp_Development.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = 16571AA41A64D5490041C44F /* Handsapp_Development.mobileprovision */; };
 		16571AA61A64D5490041C44F /* Handsapp_Development.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = 16571AA41A64D5490041C44F /* Handsapp_Development.mobileprovision */; };
+		16F3C59B1A75997400411801 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F3C59A1A75997400411801 /* CoreLocation.framework */; };
+		16F3C59D1A75997D00411801 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F3C59C1A75997D00411801 /* CoreGraphics.framework */; };
+		16F3C59F1A75998700411801 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F3C59E1A75998700411801 /* UIKit.framework */; };
+		16F3C5A11A75999400411801 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F3C5A01A75999400411801 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +47,10 @@
 		16571A991A64D5000041C44F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16571A9A1A64D5000041C44F /* HandsappTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HandsappTests.m; sourceTree = "<group>"; };
 		16571AA41A64D5490041C44F /* Handsapp_Development.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Handsapp_Development.mobileprovision; sourceTree = "<group>"; };
+		16F3C59A1A75997400411801 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		16F3C59C1A75997D00411801 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		16F3C59E1A75998700411801 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		16F3C5A01A75999400411801 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +58,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16F3C5A11A75999400411801 /* Foundation.framework in Frameworks */,
+				16F3C59F1A75998700411801 /* UIKit.framework in Frameworks */,
+				16F3C59D1A75997D00411801 /* CoreGraphics.framework in Frameworks */,
+				16F3C59B1A75997400411801 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +78,10 @@
 		16571A721A64D5000041C44F = {
 			isa = PBXGroup;
 			children = (
+				16F3C5A01A75999400411801 /* Foundation.framework */,
+				16F3C59E1A75998700411801 /* UIKit.framework */,
+				16F3C59C1A75997D00411801 /* CoreGraphics.framework */,
+				16F3C59A1A75997400411801 /* CoreLocation.framework */,
 				16571A7D1A64D5000041C44F /* Handsapp */,
 				16571A971A64D5000041C44F /* HandsappTests */,
 				16571A7C1A64D5000041C44F /* Products */,
