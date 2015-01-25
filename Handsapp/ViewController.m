@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#include "Handsapp_Header.h"
 
 @interface ViewController ()
 
@@ -24,7 +25,7 @@
     /* init tableData if it is not exist */
     self.tableData = (NSMutableArray *)[[NSUserDefaults standardUserDefaults] objectForKey:@"tableData"];
     if(!self.tableData ){
-        self.tableData = [[NSMutableArray alloc] initWithCapacity:20];
+        self.tableData = [[NSMutableArray alloc] initWithCapacity:__MAX_DATA_LENGTH];
         [[NSUserDefaults standardUserDefaults] setObject: self.tableData forKey: @"tableData"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTable:) name:@"reloadTheTable" object:nil];

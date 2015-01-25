@@ -22,6 +22,8 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>App will need your location updating in order to delivery you the nearest shop</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>

@@ -20,6 +20,9 @@
 		16F3C59D1A75997D00411801 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F3C59C1A75997D00411801 /* CoreGraphics.framework */; };
 		16F3C59F1A75998700411801 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F3C59E1A75998700411801 /* UIKit.framework */; };
 		16F3C5A11A75999400411801 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F3C5A01A75999400411801 /* Foundation.framework */; };
+		16F3C5AA1A75A31100411801 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F3C5A91A75A31100411801 /* LocationTracker.m */; };
+		16F3C5AD1A75A69500411801 /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F3C5AC1A75A69500411801 /* LocationShareModel.m */; };
+		16F3C5B01A75A75500411801 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F3C5AF1A75A75500411801 /* BackgroundTaskManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,13 @@
 		16F3C59C1A75997D00411801 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		16F3C59E1A75998700411801 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		16F3C5A01A75999400411801 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		16F3C5A21A759C5D00411801 /* Handsapp_Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Handsapp_Header.h; sourceTree = "<group>"; };
+		16F3C5A81A75A31100411801 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
+		16F3C5A91A75A31100411801 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
+		16F3C5AB1A75A69500411801 /* LocationShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationShareModel.h; sourceTree = "<group>"; };
+		16F3C5AC1A75A69500411801 /* LocationShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationShareModel.m; sourceTree = "<group>"; };
+		16F3C5AE1A75A75500411801 /* BackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
+		16F3C5AF1A75A75500411801 /* BackgroundTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTaskManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,13 +88,13 @@
 		16571A721A64D5000041C44F = {
 			isa = PBXGroup;
 			children = (
+				16571A7D1A64D5000041C44F /* Handsapp */,
+				16571A971A64D5000041C44F /* HandsappTests */,
+				16571A7C1A64D5000041C44F /* Products */,
 				16F3C5A01A75999400411801 /* Foundation.framework */,
 				16F3C59E1A75998700411801 /* UIKit.framework */,
 				16F3C59C1A75997D00411801 /* CoreGraphics.framework */,
 				16F3C59A1A75997400411801 /* CoreLocation.framework */,
-				16571A7D1A64D5000041C44F /* Handsapp */,
-				16571A971A64D5000041C44F /* HandsappTests */,
-				16571A7C1A64D5000041C44F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +114,12 @@
 				16571A831A64D5000041C44F /* AppDelegate.m */,
 				16571A851A64D5000041C44F /* ViewController.h */,
 				16571A861A64D5000041C44F /* ViewController.m */,
+				16F3C5A81A75A31100411801 /* LocationTracker.h */,
+				16F3C5A91A75A31100411801 /* LocationTracker.m */,
+				16F3C5AB1A75A69500411801 /* LocationShareModel.h */,
+				16F3C5AC1A75A69500411801 /* LocationShareModel.m */,
+				16F3C5AE1A75A75500411801 /* BackgroundTaskManager.h */,
+				16F3C5AF1A75A75500411801 /* BackgroundTaskManager.m */,
 				16571A881A64D5000041C44F /* Main.storyboard */,
 				16571A8B1A64D5000041C44F /* Images.xcassets */,
 				16571A8D1A64D5000041C44F /* LaunchScreen.xib */,
@@ -118,6 +134,7 @@
 				16571AA41A64D5490041C44F /* Handsapp_Development.mobileprovision */,
 				16571A7F1A64D5000041C44F /* Info.plist */,
 				16571A801A64D5000041C44F /* main.m */,
+				16F3C5A21A759C5D00411801 /* Handsapp_Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -248,7 +265,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				16571A871A64D5000041C44F /* ViewController.m in Sources */,
+				16F3C5AA1A75A31100411801 /* LocationTracker.m in Sources */,
 				16571A841A64D5000041C44F /* AppDelegate.m in Sources */,
+				16F3C5AD1A75A69500411801 /* LocationShareModel.m in Sources */,
+				16F3C5B01A75A75500411801 /* BackgroundTaskManager.m in Sources */,
 				16571A811A64D5000041C44F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
