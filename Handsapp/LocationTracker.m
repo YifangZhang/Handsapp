@@ -18,6 +18,12 @@
 
 @implementation LocationTracker
 
+struct Container {
+    double shopLongtitude; // If you're using char c, why not use int a?
+    double shopLatitude;
+    NSInteger shopNumber;
+};
+
 + (CLLocationManager *)sharedLocationManager {
     static CLLocationManager *_locationManager;
     
@@ -257,9 +263,14 @@
         self.myLocationAccuracy =[[myBestLocation objectForKey:ACCURACY]floatValue];
     }
     
+    
     NSLog(@"Send to Server: Latitude(%f) Longitude(%f) Accuracy(%f)",self.myLocation.latitude, self.myLocation.longitude,self.myLocationAccuracy);
     
     //TODO: Your code to send the self.myLocation and self.myLocationAccuracy to your server
+    
+    //do the comparison
+    
+    
     
     //After sending the location to the server successful, remember to clear the current array with the following code. It is to make sure that you clear up old location in the array and add the new locations from locationManager
     [self.shareModel.myLocationArray removeAllObjects];
@@ -267,7 +278,46 @@
     self.shareModel.myLocationArray = [[NSMutableArray alloc]init];
 }
 
+- (NSInteger) compareWithShopLocation{
+    
+    double tolerance = 1.0;
+    
+    NSMutableArray * shopInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"shopInfo"];
+    
+    for (NSValue * shop in shopInfo) {
+        
+        //release the nsvalue
+        struct Container oneShop;
+        [shop getValue:&oneShop];
+        double shopLongtitude = oneShop.shopLongtitude;
+        double shopLatitude = oneShop.shopLatitude;
+        double myLongtitude = (self.myLocation.longitude);
+        double myLatitude = (self.myLocation.latitude);
+        
+        //do the comparison
+        double distance = sqrt((myLongtitude - shopLongtitude) * (myLongtitude - shopLongtitude)
+                               + (myLatitude - shopLatitude) * (myLatitude - shopLatitude));
+        if (distance < tolerance) {
+            // user is inside of the range
+            // TODO: send a local push notification
+            //       send the new location into server
+            NSLog(@"user is in range %zd", oneShop.shopNumber);
+        }
+        
+    }
+    
+    return -1;
+}
 
+
+- (void) uploadIfLocationChanged: (NSInteger)newShopID{
+    NSLog(@"Upload %zd to server", newShopID);
+}
+
+
+- (void) downloadUserInfo{
+    
+}
 
 
 @end

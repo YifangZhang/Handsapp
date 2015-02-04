@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import "LocationShareModel.h"
+//#import "ShopLocation.h"
 
 @interface LocationTracker : NSObject <CLLocationManagerDelegate>
 
@@ -27,5 +28,13 @@
 - (void)startLocationTracking;
 - (void)stopLocationTracking;
 - (void)updateLocationToServer;
+
+/* comparison and upload to server functions */
+- (NSInteger) compareWithShopLocation;
+- (void) uploadIfLocationChanged: (NSInteger)newShopID;
+        //TODO: real implementation with test on real server,
+        //      Also, send a local notification to let user know location changed
+- (void) downloadUserInfo;
+        //TODO: real implementation with test on real server
 
 @end

@@ -15,6 +15,13 @@
 
 @implementation ViewController
 
+struct Container {
+    double shopLongtitude; // If you're using char c, why not use int a?
+    double shopLatitude;
+    NSInteger shopNumber;
+};
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -31,6 +38,11 @@
         //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTable:) name:@"reloadTheTable" object:nil];
      
     }/**/
+    
+    /* download the shop information */
+    [self downloadShopInfo];
+
+    
     
 }
 
@@ -165,10 +177,18 @@
     
 }
 
+-(void)downloadShopInfo{
 
+    NSMutableArray * shopInfo = [[NSMutableArray alloc] initWithCapacity:1];
+    struct Container myHouse = {40, -88, 1};
+    
+    [shopInfo addObject:[NSValue value:&myHouse withObjCType:@encode(struct Container)]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject: shopInfo forKey: @"shopInfo"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 
-
-
+}
 
 
 
