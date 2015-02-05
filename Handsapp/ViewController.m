@@ -178,20 +178,29 @@ struct Container {
 }
 
 -(void)downloadShopInfo{
-
-    NSMutableArray * shopInfo = [[NSMutableArray alloc] initWithCapacity:1];
-    struct Container myHouse = {40, -88, 1};
     
-    [shopInfo addObject:[NSValue value:&myHouse withObjCType:@encode(struct Container)]];
+    NSString * locationURL = @"http://192.168.180.4/Yifang/pushNotification6.0/downloadShopInfo.php"; // add the correct url here
+    NSURL * url = [NSURL URLWithString:locationURL];
+    NSData * data = [NSData dataWithContentsOfURL:url];
     
+    NSMutableArray * jsonArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    
+    NSMutableArray * shopInfo = [[NSMutableArray alloc] init];
+    //[shopInfo addObject:[NSValue value:&myHouse withObjCType:@encode(struct Container)]];
+    NSLog(@"Shop info has been downloaded!");
+    
+    for (int i = 0; i < jsonArray.count; i++)
+    {
+        NSString *shopLongtitudestr = [[jsonArray objectAtIndex:i] objectForKey:@"Shop_Longitude"];
+        NSString *shopLatitudestr = [[jsonArray objectAtIndex:i] objectForKey:@"Shop_Latitude"];
+        NSString *shopIDstr = [[jsonArray objectAtIndex:i] objectForKey:@"Shop_ID"];
+        NSString * shopMessage = [[jsonArray objectAtIndex:i] objectForKey:@"Shop_Message"];
+        
+        NSDictionary * currentShop =@{@"Shop_Longitude" : shopLongtitudestr, @"Shop_Latitude" : shopLatitudestr, @"Shop_Message" : shopMessage, @"Shop_ID" : shopIDstr};
+        
+        [shopInfo addObject:currentShop];
+    }
     [[NSUserDefaults standardUserDefaults] setObject: shopInfo forKey: @"shopInfo"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-
 }
-
-
-
-
-
 @end

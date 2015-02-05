@@ -270,7 +270,7 @@ struct Container {
     
     //do the comparison
     
-    
+    [self compareWithShopLocation];
     
     //After sending the location to the server successful, remember to clear the current array with the following code. It is to make sure that you clear up old location in the array and add the new locations from locationManager
     [self.shareModel.myLocationArray removeAllObjects];
@@ -279,18 +279,23 @@ struct Container {
 }
 
 - (NSInteger) compareWithShopLocation{
-    
+    NSLog(@"enter");
     double tolerance = 1.0;
     
     NSMutableArray * shopInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"shopInfo"];
     
-    for (NSValue * shop in shopInfo) {
+    for (int i = 0; i < shopInfo.count; i++)
+    {
+        NSString *shopLongtitudestr = [[shopInfo objectAtIndex:i] objectForKey:@"Shop_Longitude"];
+        NSString *shopLatitudestr = [[shopInfo objectAtIndex:i] objectForKey:@"Shop_Latitude"];
+        NSString *shopIDstr = [[shopInfo objectAtIndex:i] objectForKey:@"Shop_ID"];
+        NSString * shopMessage = [[shopInfo objectAtIndex:i] objectForKey:@"Shop_Message"];
         
+        double shopLongtitude = [shopLongtitudestr doubleValue];
+        double shopLatitude = [shopLatitudestr doubleValue];
+        NSInteger shopID = [shopIDstr integerValue];
         //release the nsvalue
-        struct Container oneShop;
-        [shop getValue:&oneShop];
-        double shopLongtitude = oneShop.shopLongtitude;
-        double shopLatitude = oneShop.shopLatitude;
+        NSLog(@"shop info %f || %f", shopLongtitude, shopLatitude);
         double myLongtitude = (self.myLocation.longitude);
         double myLatitude = (self.myLocation.latitude);
         
@@ -301,12 +306,16 @@ struct Container {
             // user is inside of the range
             // TODO: send a local push notification
             //       send the new location into server
-            NSLog(@"user is in range %zd", oneShop.shopNumber);
+            NSLog(@"user is in range %zd", shopID);
+            NSLog(@"user will get %@", shopMessage);
+            return shopID;
+            break;
         }
         
     }
     
-    return -1;
+    return -1; //not in range
+    
 }
 
 
