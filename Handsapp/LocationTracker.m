@@ -269,8 +269,27 @@ struct Container {
     //TODO: Your code to send the self.myLocation and self.myLocationAccuracy to your server
     
     //do the comparison
+    NSInteger userCurrentLocation = [self compareWithShopLocation];
     
-    [self compareWithShopLocation];
+    //if it is the first time, upload to server, else compare then decide if need to upload.
+    NSInteger prevUserLocation = [[NSUserDefaults standardUserDefaults] integerForKey:@"userLocation"];
+    if (!prevUserLocation) {
+        prevUserLocation = userCurrentLocation;
+        [[NSUserDefaults standardUserDefaults] setInteger:userCurrentLocation forKey:@"userLocation"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self uploadIfLocationChanged:userCurrentLocation];
+        
+    }
+    else{
+        if (userCurrentLocation == prevUserLocation) {
+            NSLog(@"user at same place");
+        } else {
+            [self uploadIfLocationChanged:userCurrentLocation];
+            [[NSUserDefaults standardUserDefaults] setInteger:userCurrentLocation forKey:@"userLocation"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
+        }
+    }
     
     //After sending the location to the server successful, remember to clear the current array with the following code. It is to make sure that you clear up old location in the array and add the new locations from locationManager
     [self.shareModel.myLocationArray removeAllObjects];
@@ -294,7 +313,7 @@ struct Container {
         double shopLongtitude = [shopLongtitudestr doubleValue];
         double shopLatitude = [shopLatitudestr doubleValue];
         NSInteger shopID = [shopIDstr integerValue];
-        //release the nsvalue
+
         NSLog(@"shop info %f || %f", shopLongtitude, shopLatitude);
         double myLongtitude = (self.myLocation.longitude);
         double myLatitude = (self.myLocation.latitude);
@@ -314,18 +333,33 @@ struct Container {
         
     }
     
-    return -1; //not in range
+    return 0; //not in range
     
 }
 
-
-- (void) uploadIfLocationChanged: (NSInteger)newShopID{
-    NSLog(@"Upload %zd to server", newShopID);
-}
-
-
-- (void) downloadUserInfo{
+- (void) uploadIfLocationChanged: (NSInteger) newShopID{
     
+    NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"DeviceToken"];
+    NSString *post =[[NSString alloc] initWithFormat:@"newShopID=%zd&token=%@",newShopID, deviceToken];
+    NSLog(@"PostData: %@",post);
+    NSURL *url=[NSURL URLWithString:@"http://192.168.180.4/Yifang/pushNotification6.0/updateUserLocation.php"];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    //[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+    NSError *error = [[NSError alloc] init];
+    NSHTTPURLResponse *response = nil;
+    NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSLog(@"Response code: %ld", (long)[response statusCode]);
+
+    NSLog(@"Upload the the new shop ID: %zd into server", newShopID);
+
 }
 
 

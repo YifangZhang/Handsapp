@@ -16,13 +16,14 @@
 
 
 /* uploading functions */
--(void)uploadToken;
+- (void)uploadToken;
 
 /* download functions */
 - (IBAction)downloadSendToAllNotification:(id)sender;
 
 /* updating shop info function */
--(void)downloadShopInfo; //TODO: real implementation with test on real server
+- (void)downloadShopInfo; //TODO: real implementation with test on real server
+//- (void) downloadUserInfo; //TODO: real implementation with test on real server // CANCELLED: may violate privacy of user
 
 
 @end

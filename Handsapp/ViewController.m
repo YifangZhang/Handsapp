@@ -203,4 +203,7 @@ struct Container {
     [[NSUserDefaults standardUserDefaults] setObject: shopInfo forKey: @"shopInfo"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+
+
 @end
